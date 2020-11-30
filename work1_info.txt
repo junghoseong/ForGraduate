@@ -1,0 +1,26 @@
+[File system for work 1]
+
+At the server (before running preparation.py):
+	work1 (server)
+	ㄴ ILSVRC2010_images_val/
+	ㄴ preparation.py
+	ㄴ work1_info.txt
+
+At the edge (before running fine_tuning.py):
+	work1 (edge)
+	ㄴ MobileNetV2_with_ImageNet_quant_edgetpu.tflite (the output of preparation.py, must be received from the server)	
+	ㄴ 17flowers/
+	ㄴ fine_tuning.py
+	ㄴ work1_info.txt	
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+[Shell command for work 1]
+
+At the server: 
+	cd work1\ \(server\)/
+	python3 preparation.py --imageset_dir='./ILSVRC2010_images_val/'  
+
+At the edge (i.e., Coral dev board):
+	cd work1\ \(edge\)/
+	python3 fine_tuning.py --embedding_extractor_path='./MobileNetV2_with_ImageNet_quant_edgetpu.tflite' --dataset_dir='./17flowers/'
