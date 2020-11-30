@@ -1,0 +1,10 @@
+Edge TPU Compiler version 14.1.317412892
+Input: ./output/MobileNetV2_with_ImageNet_quant_B.tflite
+Output: MobileNetV2_with_ImageNet_quant_B_edgetpu.tflite
+
+Operator                       Count      Status
+
+DEPTHWISE_CONV_2D              1          Mapped to Edge TPU
+CONV_2D                        2          Mapped to Edge TPU
+MEAN                           1          Mapped to Edge TPU
+QUANTIZE                       2          Mapped to Edge TPU
