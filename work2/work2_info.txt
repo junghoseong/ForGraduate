@@ -1,0 +1,45 @@
+[File system for work 2]
+
+At the server (before running preparation.py):
+	work2 (server)
+	ㄴ MobileNetV2_with_ImageNet_full.h5 (the output of work 1, must be received from the server)
+	ㄴ ILSVRC2010_images_val/
+	ㄴ preparation.py
+	ㄴ work2_info.txt
+	
+At the edge 1 (before running fine_tuning_1.py):
+	work2 (edge1)
+	ㄴ MobileNetV2_with_ImageNet_quant_A_edgetpu.tflite (the output of preparation.py, must be received from the server)
+	ㄴ 17flowers/
+	ㄴ fine_tuning_1.py
+	ㄴ work2_info.txt
+
+At the edge 2 (before running fine_tuning_2.py):
+	work2 (edge2)
+	ㄴ MobileNetV2_with_ImageNet_quant_B_edgetpu.tflite (the output of preparation.py, must be received from the server)
+	ㄴ MobileNetV2_with_ImageNet_quant_B.tflite (the output of preparation.py, must be received from the server)
+	ㄴ output_from_edge1/ (the output (directory) of fine_tuning_1.py, must be received from the edge 1 and renamed)
+	ㄴ fine_tuning_2.py
+	ㄴ work2_info.txt
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+[Shell command for work 2]
+
+At the server: 
+	cd work2\ \(server\)/
+	netron ./MobileNetV2_with_ImageNet_full.h5 (netron install 필요, model 전체 구조 및 split boundary layer의 name을 localhost:8080을 통해 확인하기 위함)
+	python3 preparation.py --split_boundary='block_16_project' --imageset_dir='./ILSVRC2010_images_val/' 
+
+At the edge 1 (i.e., Coral dev board 1):
+	cd work2\ \(edge1\)/
+	python3 fine_tuning_1.py --embedding_extractor_A_path='./MobileNetV2_with_ImageNet_quant_A_edgetpu.tflite' --dataset_dir='./17flowers/'
+
+At the edge 2 (i.e., Coral dev board 2):
+	cd work2\ \(edge2\)/
+	netron ./MobileNetV2_with_ImageNet_quant_B.tflite (netron install 필요, split boundary layer의 input이 양자화되었을 때의 scaling factor 및 zero point를 확인하기 위함)
+	python3 fine_tuning_2.py --embedding_extractor_B_path='./MobileNetV2_with_ImageNet_quant_B_edgetpu.tflite' --dataset_dir='./output_from_edge1/' \
+	--scaling_factor=0.0235294122248888 --zero_point=9
+
+0.0235294122248888
+0.4560454487800598
