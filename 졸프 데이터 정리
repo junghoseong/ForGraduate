@@ -1,0 +1,109 @@
+총 parameter : 2257984
+python3 preparation.py --split_boundary='block_3_project' --imageset_dir='./ILSVRC2010_images_val/' 
+
+python3 fine_tuning_2.py --embedding_extractor_B_path='./MobileNetV2_with_ImageNet_quant_B_edgetpu.tflite' --dataset_dir='./output_from_edge1/' --scaling_factor=0.4560454487800598   --zero_point=115
+
+expanded_conv_depthwise
+expanded_conv_project
+
+3. block_1_expand
+parameter 1984 / 2256000
+A.tflite :  44.51KB, B_tflite : 2.74MB
+scaling_factor :  0.3098244369029999
+zero_point : 165
+--memory error..
+
+block_1_depthwise
+block_1_project
+
+6. block_3_expand
+parameter 17008 / 2240976
+A.tflite :  80.53KB, B_tflite : 2.70MB
+scaling_factor :  0.4513380527496338 
+zero_point : 145
+ loss : 0.78 train_acc : 81.07% val_acc : 71.32% test_acc : 73.53%  
+data_preprocess : 9.83s, training : 38.59s
+train_and_val_dataset : 368.5MB, test_dataset : 40.9MB
+
+block_3_depthwise
+
+8. block_3_project
+parameter 22912/ 2235072
+A.tflite :  96.53KB, B_tflite : 2.69MB
+scaling_factor :  0.0235294122248888
+zero_point : 138
+ loss : 1.78 train_acc : 46.60% val_acc : 40.44% test_acc : 41.18%  
+data_preprocess : 4.75s, training : 38.58s
+train_and_val_dataset : 184.3MB, test_dataset : 20.5MB
+
+9. block_6_expand
+parameter 59008 / 2198976
+A.tflite :  156.53KB, B_tflite : 2.63MB
+scaling_factor :  0.4560454487800598
+zero_point : 115
+ loss : 0.43 train_acc : 92.56% val_acc : 87.50% test_acc : 82.35%  
+0.44 92% 81.62% 87.5%
+data_preprocess : 3.59s, training : 38.57s
+train_and_val_dataset : 122.8MB, test_dataset : 13.6MB
+
+block_6_depthwise
+
+11. block_6_project
+parameter 68416 / 2189568
+A.tflite :  176.53KB, B_tflite : 2.61MB
+scaling_factor :  0.0235294122248888
+zero_point : 108
+ loss : 1.78 train_acc : 46.60% val_acc : 40.44% test_acc : 41.18%  
+data_preprocess : 4.75s, training : 38.58s
+train_and_val_dataset : 184.3MB, test_dataset : 20.5MB
+
+12. block_10_expand
+parameter 248768 / 2009216
+A.tflite :  432.53KB, B_tflite : 2.36MB
+scaling_factor :  0.23828601837158203
+zero_point : 75
+ loss : 1.60 train_acc : 57.90% val_acc : 44.12% test_acc : 48.53%  
+data_preprocess : 2.30s, training : 38.59s
+train_and_val_dataset : 61.4MB, test_dataset : 6.8MB
+
+block_10_depthwise
+block_10_project
+
+15. block_13_expand
+parameter 558656 / 1699328
+A.tflite :  876.53KB, B_tflite : 1.93MB
+scaling_factor :  0.25736555457115173 
+zero_point : 46
+ loss : 1.54 train_acc : 56.07% val_acc : 52.21% test_acc : 45.59%  
+data_preprocess : 1.34s, training : 38.58s
+train_and_val_dataset : 92.1MB, test_dataset : 10.2MB
+
+block_13_depthwise
+block_13_project
+
+18. block_16_expand
+parameter 1364864 / 893120
+A.tflite :  1.84MB, B_tflite : 968.52KB
+scaling_factor :  0.3038180470466614
+zero_point : 15
+ loss : 1.27 train_acc : 64.34% val_acc : 48.53% test_acc : 56.62%  
+data_preprocess : 2.40s, training : 38.59s
+train_and_val_dataset : 38.4MB, test_dataset : 4.3MB
+
+block_16_depthwise
+block_16_project
+0.0235294122248888
+9
+test_acc : 80.73%, val acc : 77.06%, train acc :82.73%
+186MB, 20MB
+Conv_1'
+
+
+19. block_16_depthwise
+test_acc : 75.23%
+val acc : 70.64%
+test acc : 76.82%
+0.0235294122248888
+0.4560454487800598
+
+186.1MB, 20.5MB
